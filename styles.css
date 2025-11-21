@@ -1,0 +1,439 @@
+:root {
+    --bg-dark: #0f0f13;
+    --card-bg: #1a1a24;
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+    /* Made lighter for better contrast */
+    --accent-honda: #e60012;
+    --accent-yamaha: #003594;
+    --accent-ktm: #ff6600;
+    --gold: #ffd700;
+    --glass: rgba(255, 255, 255, 0.05);
+    --border: rgba(255, 255, 255, 0.1);
+    --header-bg: rgba(15, 15, 19, 0.85);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
+
+.background-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at 50% 50%, rgba(76, 29, 149, 0.15), transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* --- Professional Header --- */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.2rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--header-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: linear-gradient(45deg, #fff, #a0a0a0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    position: relative;
+    opacity: 0.9;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ffffff;
+    opacity: 1;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* --- Hero Section --- */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 1rem;
+    position: relative;
+    overflow: hidden;
+    background: url('https://images.unsplash.com/photo-1517512006864-7edc30d49d11?q=80&w=2070&auto=format&fit=crop') no-repeat center center/cover;
+    margin-top: 0;
+    /* Reset margin since header is fixed */
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(15, 15, 19, 0.3), var(--bg-dark));
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    margin-top: 60px;
+    /* Offset for fixed header */
+}
+
+.hero h1 {
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    color: #ffffff;
+    /* Explicitly white */
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s forwards 0.5s;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+    color: #f0f0f0;
+    /* Almost white */
+    font-size: 1.3rem;
+    margin-bottom: 2.5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s forwards 0.8s;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1.2rem 3rem;
+    background: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    font-weight: 800;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s forwards 1.1s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.cta-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(255, 255, 255, 0.3);
+    background: var(--gold);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Cards Section --- */
+.cards-section {
+    padding: 6rem 5% 4rem;
+    /* Added top padding for spacing */
+}
+
+.section-title {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 4rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 3rem;
+    justify-items: center;
+}
+
+/* Card Styles (Futchamp Style) */
+.card {
+    width: 100%;
+    max-width: 380px;
+    background: linear-gradient(145deg, #2a2a35, #1a1a24);
+    border-radius: 24px;
+    padding: 1.5rem;
+    position: relative;
+    border: 1px solid var(--border);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+    z-index: 1;
+}
+
+.card:hover::before {
+    transform: translateX(100%);
+}
+
+.card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.3);
+    z-index: 10;
+}
+
+/* Manufacturer Borders */
+.card.honda {
+    border-top: 5px solid var(--accent-honda);
+}
+
+.card.yamaha {
+    border-top: 5px solid var(--accent-yamaha);
+}
+
+.card.ktm {
+    border-top: 5px solid var(--accent-ktm);
+}
+
+.card.husqvarna {
+    border-top: 5px solid #002550;
+}
+
+.card.kawasaki {
+    border-top: 5px solid #69BE28;
+}
+
+.card.gasgas {
+    border-top: 5px solid #e60000;
+}
+
+.card.suzuki {
+    border-top: 5px solid #FFCC00;
+}
+
+.card.beta {
+    border-top: 5px solid #e30613;
+}
+
+.card.fantic {
+    border-top: 5px solid #000000;
+}
+
+.card.tm {
+    border-top: 5px solid #0099cc;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+.rating {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #ffffff;
+}
+
+.position {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+}
+
+.card-image {
+    width: 100%;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.card-image img {
+    max-width: 110%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 20px rgba(0, 0, 0, 0.6));
+    transition: transform 0.5s ease;
+}
+
+.card:hover .card-image img {
+    transform: scale(1.15) rotate(-3deg) translateY(-10px);
+}
+
+.card-info {
+    position: relative;
+    z-index: 2;
+}
+
+.card-info h3 {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ffffff;
+}
+
+/* Details Section */
+.details {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    text-align: center;
+}
+
+.pros-cons {
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    text-align: left;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: 12px;
+}
+
+.pro {
+    color: #00ff88;
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.con {
+    color: #ff4d4d;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.buy-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    font-weight: 800;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.buy-btn:hover {
+    background: var(--gold);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    header {
+        padding: 1rem 5%;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+    }
+
+    .nav-links {
+        display: none;
+        /* For now, hide nav on mobile or implement hamburger */
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+}
